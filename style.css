@@ -1,0 +1,410 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    color: #333;
+    background: #fff;
+    line-height: 1.8;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- ヘッダー --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 100;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+}
+
+.header-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.05em;
+}
+
+.header-nav {
+    display: flex;
+    gap: 28px;
+}
+
+.header-nav a {
+    font-size: 13px;
+    color: #555;
+    text-decoration: none;
+}
+
+.header-nav a:hover {
+    color: #1a1a1a;
+}
+
+/* --- ヒーロー --- */
+.hero {
+    padding: 140px 0 80px;
+    background: #f7f8fa;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.hero-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2d6e8e;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+.hero-desc {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 32px;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: #2d6e8e;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.hero-btn:hover {
+    background: #1b4d63;
+}
+
+/* --- 強み --- */
+.strengths {
+    padding: 64px 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.strength-item {
+    padding: 24px 0;
+}
+
+.strength-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2d6e8e;
+    margin-bottom: 12px;
+}
+
+.strength-item h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.strength-item p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* --- セクション共通 --- */
+.section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2d6e8e;
+    letter-spacing: 0.15em;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* --- 実績 --- */
+.works {
+    padding: 72px 0;
+    background: #f7f8fa;
+}
+
+.works-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.work-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+
+.work-image {
+    position: relative;
+    background: #2a3a42;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.work-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(255,255,255,0.15);
+    padding: 3px 10px;
+    letter-spacing: 0.05em;
+}
+
+.work-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.work-placeholder span:last-child {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+}
+
+.work-body {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.work-body h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.work-body p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.work-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.work-tags span {
+    font-size: 11px;
+    color: #2d6e8e;
+    background: #eef5f8;
+    padding: 3px 10px;
+    font-weight: 600;
+}
+
+.work-link {
+    font-size: 13px;
+    color: #2d6e8e;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: auto;
+}
+
+.work-link:hover {
+    color: #1b4d63;
+}
+
+/* --- 自己紹介 --- */
+.about {
+    padding: 72px 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.about-content {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.about-text h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+.about-text p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.about-skills {
+    margin-top: 28px;
+    padding: 24px;
+    background: #f7f8fa;
+    border: 1px solid #e8e8e8;
+}
+
+.about-skills h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.about-skills ul {
+    list-style: none;
+}
+
+.about-skills li {
+    font-size: 13px;
+    color: #555;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+}
+
+.about-skills li::before {
+    content: '−';
+    position: absolute;
+    left: 0;
+    color: #2d6e8e;
+    font-weight: 700;
+}
+
+/* --- お問い合わせ --- */
+.contact {
+    padding: 72px 0;
+    background: #f7f8fa;
+}
+
+.contact-content {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-content > p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 28px;
+}
+
+.contact-methods {
+    margin-bottom: 20px;
+}
+
+.contact-item {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+}
+
+.contact-label {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.contact-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.contact-note {
+    font-size: 12px;
+    color: #999;
+}
+
+/* --- フッター --- */
+.footer {
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer p {
+    font-size: 11px;
+    color: #999;
+}
+
+/* --- レスポンシブ --- */
+@media (max-width: 700px) {
+    .header-nav {
+        gap: 16px;
+    }
+
+    .header-nav a {
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .strengths-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .work-card {
+        grid-template-columns: 1fr;
+    }
+
+    .work-image {
+        min-height: 160px;
+    }
+
+    .work-body {
+        padding: 20px;
+    }
+}
