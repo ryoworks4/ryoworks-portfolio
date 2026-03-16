@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RyoWorks - 医療 × AI Web制作</title>
+    <meta name="description" content="医療×AIの専門家によるWeb制作・AIツール開発。現役放射線技師が現場目線でクリニックのDXを支援します。">
+    <meta property="og:title" content="RyoWorks - 医療 × AI Web制作">
+    <meta property="og:description" content="クリニックの「困った」をWebとテクノロジーで解決します">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ryoworks4.github.io/ryoworks-portfolio/">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -164,7 +169,7 @@
             <div class="contact-methods">
                 <div class="contact-item">
                     <div class="contact-label">メール</div>
-                    <div class="contact-value">ryoworks44@gmail.com</div>
+                    <div class="contact-value" id="contact-email"></div>
                 </div>
             </div>
             <p class="contact-note">※ 通常1〜2営業日以内にご返信いたします。</p>
@@ -179,5 +184,8 @@
     </div>
 </footer>
 
+<script>
+    document.getElementById('contact-email').textContent = ['ryoworks44','gmail.com'].join('@');
+</script>
 </body>
 </html>

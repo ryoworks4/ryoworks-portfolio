@@ -9,6 +9,7 @@ body {
     color: #333;
     background: #fff;
     line-height: 1.8;
+    padding-top: 56px;
 }
 
 .container {
@@ -59,7 +60,7 @@ body {
 
 /* --- ヒーロー --- */
 .hero {
-    padding: 140px 0 80px;
+    padding: 84px 0 80px;
     background: #f7f8fa;
     border-bottom: 1px solid #e8e8e8;
 }
@@ -388,7 +389,7 @@ body {
     }
 
     .hero {
-        padding: 80px 0 48px;
+        padding: 24px 0 48px;
     }
 
     .hero h1 {
