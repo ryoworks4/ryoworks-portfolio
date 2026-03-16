@@ -376,19 +376,36 @@ body {
 /* --- レスポンシブ --- */
 @media (max-width: 700px) {
     .header-nav {
-        gap: 16px;
+        gap: 12px;
     }
 
     .header-nav a {
-        font-size: 12px;
+        font-size: 11px;
+    }
+
+    .header-name {
+        font-size: 14px;
     }
 
     .hero {
-        padding: 100px 0 60px;
+        padding: 80px 0 48px;
     }
 
     .hero h1 {
-        font-size: 24px;
+        font-size: 20px;
+    }
+
+    .hero-desc {
+        font-size: 13px;
+    }
+
+    .hero-btn {
+        padding: 10px 24px;
+        font-size: 13px;
+    }
+
+    .strengths {
+        padding: 40px 0;
     }
 
     .strengths-grid {
@@ -396,15 +413,44 @@ body {
         gap: 16px;
     }
 
+    .works {
+        padding: 48px 0;
+    }
+
     .work-card {
         grid-template-columns: 1fr;
     }
 
     .work-image {
-        min-height: 160px;
+        min-height: 140px;
     }
 
     .work-body {
         padding: 20px;
+    }
+
+    .work-body h3 {
+        font-size: 16px;
+    }
+
+    .about {
+        padding: 48px 0;
+    }
+
+    .about-text h3 {
+        font-size: 18px;
+    }
+
+    .contact {
+        padding: 48px 0;
+    }
+
+    .contact-value {
+        font-size: 14px;
+        word-break: break-all;
+    }
+
+    .section-title {
+        font-size: 13px;
     }
 }
