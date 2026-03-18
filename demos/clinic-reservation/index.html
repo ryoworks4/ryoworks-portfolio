@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI予約フォーム - デモ</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+        }
+
+        .page-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d6e8e;
+        }
+
+        .page-header-back {
+            font-size: 13px;
+            color: #2d6e8e;
+            text-decoration: none;
+        }
+
+        .page-header-back:hover {
+            color: #1b4d63;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .form-section {
+            padding: 40px 0 60px;
+        }
+
+        .form-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 36px 32px;
+        }
+
+        .form-card h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .form-card .form-desc {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .form-group label .required {
+            font-size: 12px;
+            color: #e74c3c;
+            margin-left: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 15px;
+            border: 1px solid #d0d0d0;
+            background: #fff;
+            color: #333;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2d6e8e;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-group .hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .ai-suggest {
+            margin-top: -8px;
+            margin-bottom: 22px;
+            padding: 14px 16px;
+            background: #eef5f8;
+            border-left: 3px solid #2d6e8e;
+            font-size: 14px;
+            color: #2d6e8e;
+            display: none;
+        }
+
+        .ai-suggest strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #2d6e8e;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #1b4d63;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            background: #a0b8c4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 48px 24px;
+        }
+
+        .success-message .check-icon {
+            width: 64px;
+            height: 64px;
+            background: #2d6e8e;
+            color: #fff;
+            font-size: 32px;
+            line-height: 64px;
+            text-align: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .success-message h2 {
+            font-size: 20px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .success-message .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #2d6e8e;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .demo-badge {
+            text-align: center;
+            padding: 12px;
+            background: #fff3cd;
+            color: #856404;
+            font-size: 13px;
+            border-bottom: 1px solid #ffc107;
+        }
+
+        @media (max-width: 600px) {
+            .form-card {
+                padding: 24px 20px;
+            }
+
+            .form-card h1 {
+                font-size: 19px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .page-header-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="demo-badge">
+    これはデモ版です。入力されたデータはスプレッドシートに記録されます。
+</div>
+
+<header class="page-header">
+    <div class="container">
+        <span class="page-header-title">AI予約フォーム</span>
+        <a href="../../works/clinic-reservation.html" class="page-header-back">← 実績に戻る</a>
+    </div>
+</header>
+
+<section class="form-section">
+    <div class="container">
+        <div class="form-card" id="formCard">
+            <h1>診療予約</h1>
+            <p class="form-desc">以下の項目を入力してください。症状に応じた診療科を自動で提案します。</p>
+
+            <form id="reservationForm">
+                <div class="form-group">
+                    <label>お名前<span class="required">必須</span></label>
+                    <input type="text" name="name" placeholder="例：山田 太郎" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>電話番号<span class="required">必須</span></label>
+                        <input type="tel" name="phone" placeholder="例：090-1234-5678" required>
+                    </div>
+                    <div class="form-group">
+                        <label>年齢</label>
+                        <input type="number" name="age" placeholder="例：45" min="0" max="120">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>症状・お悩み<span class="required">必須</span></label>
+                    <textarea name="symptoms" placeholder="例：3日前から頭痛がひどく、市販薬を飲んでも治りません。熱は37.5度です。" required></textarea>
+                    <p class="hint">できるだけ詳しくお書きください。AIが最適な診療科を提案します。</p>
+                </div>
+
+                <div class="ai-suggest" id="aiSuggest">
+                    <strong>AI提案</strong>
+                    <span id="aiSuggestText"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>希望診療科</label>
+                    <select name="department">
+                        <option value="">AI提案に任せる</option>
+                        <option value="内科">内科</option>
+                        <option value="外科">外科</option>
+                        <option value="小児科">小児科</option>
+                        <option value="皮膚科">皮膚科</option>
+                        <option value="耳鼻咽喉科">耳鼻咽喉科</option>
+                        <option value="整形外科">整形外科</option>
+                        <option value="眼科">眼科</option>
+                        <option value="その他">その他</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>希望日<span class="required">必須</span></label>
+                        <input type="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>希望時間帯</label>
+                        <select name="time">
+                            <option value="午前（9:00〜12:00）">午前（9:00〜12:00）</option>
+                            <option value="午後（14:00〜17:00）">午後（14:00〜17:00）</option>
+                            <option value="夕方（17:00〜19:00）">夕方（17:00〜19:00）</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>備考</label>
+                    <textarea name="note" placeholder="例：車椅子を使用しています。初診です。" style="height: 70px;"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">予約を送信する</button>
+            </form>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <div class="check-icon">&#10003;</div>
+            <h2>予約を受け付けました</h2>
+            <p>確認のため、クリニックからご連絡いたします。<br>しばらくお待ちください。</p>
+            <a href="javascript:location.reload()" class="back-btn">もう一度予約する</a>
+        </div>
+    </div>
+</section>
+
+<script>
+    // 日付の最小値を今日に設定
+    var dateInput = document.querySelector('input[name="date"]');
+    var today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+    dateInput.value = today;
+
+    // 症状入力後にAI提案を表示（簡易ルールベース）
+    var symptomsInput = document.querySelector('textarea[name="symptoms"]');
+    var aiSuggest = document.getElementById('aiSuggest');
+    var aiSuggestText = document.getElementById('aiSuggestText');
+    var suggestTimer;
+
+    symptomsInput.addEventListener('input', function() {
+        clearTimeout(suggestTimer);
+        var text = this.value;
+        if (text.length < 5) {
+            aiSuggest.style.display = 'none';
+            return;
+        }
+        suggestTimer = setTimeout(function() {
+            var suggestion = suggestDepartment(text);
+            if (suggestion) {
+                aiSuggestText.textContent = suggestion;
+                aiSuggest.style.display = 'block';
+            }
+        }, 500);
+    });
+
+    function suggestDepartment(text) {
+        var rules = [
+            { keywords: ['頭痛', '熱', '咳', '喉', '風邪', 'だるい', '倦怠', '吐き気', '腹痛', 'お腹', '下痢', '便秘', '食欲'], dept: '内科', reason: '内科の受診をおすすめします。' },
+            { keywords: ['湿疹', 'かゆい', '肌荒れ', 'じんましん', 'ニキビ', '皮膚', '発疹', 'かぶれ'], dept: '皮膚科', reason: '皮膚科の受診をおすすめします。' },
+            { keywords: ['骨', '関節', '腰痛', '肩', '膝', '捻挫', '骨折', '筋肉', '背中'], dept: '整形外科', reason: '整形外科の受診をおすすめします。' },
+            { keywords: ['耳', '鼻', '喉が痛い', '鼻水', '鼻づまり', 'めまい', '難聴', '花粉'], dept: '耳鼻咽喉科', reason: '耳鼻咽喉科の受診をおすすめします。' },
+            { keywords: ['子ども', '子供', '小児', '赤ちゃん', '乳児'], dept: '小児科', reason: '小児科の受診をおすすめします。' },
+            { keywords: ['目', '視力', '充血', 'まぶた', '目やに', 'ものもらい'], dept: '眼科', reason: '眼科の受診をおすすめします。' },
+            { keywords: ['怪我', 'けが', '切り傷', '出血', '縫う'], dept: '外科', reason: '外科の受診をおすすめします。' }
+        ];
+        for (var i = 0; i < rules.length; i++) {
+            for (var j = 0; j < rules[i].keywords.length; j++) {
+                if (text.indexOf(rules[i].keywords[j]) !== -1) {
+                    return '症状から「' + rules[i].dept + '」の受診をおすすめします。';
+                }
+            }
+        }
+        return '症状を確認し、最適な診療科をご案内いたします。';
+    }
+
+    // フォーム送信
+    var GAS_URL = 'https://script.google.com/macros/s/AKfycbxswmHqpyKLsLJUCJzoufolw-vWCEWDwGo5ZpQLT6x5gOZ8mj2yUWBYf8K7w9jKB8879w/exec';
+
+    document.getElementById('reservationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = '送信中...';
+
+        var formData = new FormData(this);
+        var data = {};
+        formData.forEach(function(value, key) {
+            data[key] = value;
+        });
+
+        // AI提案があれば追加
+        if (aiSuggest.style.display === 'block') {
+            data.ai_suggestion = aiSuggestText.textContent;
+        }
+
+        data.submitted_at = new Date().toLocaleString('ja-JP');
+
+        if (!GAS_URL) {
+            // GAS未設定時はデモモード
+            setTimeout(function() {
+                document.getElementById('formCard').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+            }, 1000);
+            return;
+        }
+
+        fetch(GAS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(function() {
+            document.getElementById('formCard').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        })
+        .catch(function() {
+            alert('送信に失敗しました。時間をおいてお試しください。');
+            btn.disabled = false;
+            btn.textContent = '予約を送信する';
+        });
+    });
+</script>
+
+</body>
+</html>

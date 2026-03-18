@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
     color: #333;
@@ -37,7 +41,7 @@ body {
 }
 
 .header-name {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: #1a1a1a;
     letter-spacing: 0.05em;
@@ -49,13 +53,41 @@ body {
 }
 
 .header-nav a {
-    font-size: 13px;
+    font-size: 14px;
     color: #555;
     text-decoration: none;
 }
 
 .header-nav a:hover {
     color: #1a1a1a;
+}
+
+/* --- アニメーション --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* --- ヒーロー --- */
@@ -66,7 +98,7 @@ body {
 }
 
 .hero-label {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     color: #2d6e8e;
     letter-spacing: 0.1em;
@@ -74,7 +106,7 @@ body {
 }
 
 .hero h1 {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
     line-height: 1.5;
     color: #1a1a1a;
@@ -82,19 +114,24 @@ body {
 }
 
 .hero-desc {
-    font-size: 15px;
+    font-size: 16px;
     color: #666;
     margin-bottom: 32px;
 }
 
 .hero-btn {
     display: inline-block;
-    padding: 12px 32px;
+    padding: 14px 36px;
     background: #2d6e8e;
     color: #fff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.hero-btn:active {
+    transform: scale(0.97);
 }
 
 .hero-btn:hover {
@@ -118,28 +155,28 @@ body {
 }
 
 .strength-num {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: #2d6e8e;
     margin-bottom: 12px;
 }
 
 .strength-item h3 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 8px;
 }
 
 .strength-item p {
-    font-size: 13px;
+    font-size: 14px;
     color: #666;
     line-height: 1.8;
 }
 
 /* --- セクション共通 --- */
 .section-title {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: #2d6e8e;
     letter-spacing: 0.15em;
@@ -147,7 +184,7 @@ body {
 }
 
 .section-subtitle {
-    font-size: 12px;
+    font-size: 13px;
     color: #999;
     text-align: center;
     margin-bottom: 40px;
@@ -171,6 +208,12 @@ body {
     background: #fff;
     border: 1px solid #e0e0e0;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .work-image {
@@ -187,11 +230,11 @@ body {
     position: absolute;
     top: 12px;
     left: 12px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     color: #fff;
     background: rgba(255,255,255,0.15);
-    padding: 3px 10px;
+    padding: 4px 12px;
     letter-spacing: 0.05em;
 }
 
@@ -212,6 +255,12 @@ body {
     color: rgba(255,255,255,0.5);
 }
 
+.work-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .work-body {
     padding: 28px 32px;
     display: flex;
@@ -219,14 +268,14 @@ body {
 }
 
 .work-body h3 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 10px;
 }
 
 .work-body p {
-    font-size: 13px;
+    font-size: 14px;
     color: #666;
     line-height: 1.8;
     margin-bottom: 16px;
@@ -240,19 +289,20 @@ body {
 }
 
 .work-tags span {
-    font-size: 11px;
+    font-size: 13px;
     color: #2d6e8e;
     background: #eef5f8;
-    padding: 3px 10px;
+    padding: 4px 12px;
     font-weight: 600;
 }
 
 .work-link {
-    font-size: 13px;
+    font-size: 14px;
     color: #2d6e8e;
     text-decoration: none;
     font-weight: 700;
     margin-top: auto;
+    transition: color 0.2s ease;
 }
 
 .work-link:hover {
@@ -271,14 +321,14 @@ body {
 }
 
 .about-text h3 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 16px;
 }
 
 .about-text p {
-    font-size: 14px;
+    font-size: 15px;
     color: #555;
     margin-bottom: 12px;
 }
@@ -291,7 +341,7 @@ body {
 }
 
 .about-skills h4 {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 12px;
@@ -302,7 +352,7 @@ body {
 }
 
 .about-skills li {
-    font-size: 13px;
+    font-size: 14px;
     color: #555;
     padding: 4px 0;
     padding-left: 16px;
@@ -330,7 +380,7 @@ body {
 }
 
 .contact-content > p {
-    font-size: 14px;
+    font-size: 15px;
     color: #555;
     margin-bottom: 28px;
 }
@@ -346,7 +396,7 @@ body {
 }
 
 .contact-label {
-    font-size: 12px;
+    font-size: 13px;
     color: #999;
     margin-bottom: 4px;
 }
@@ -358,7 +408,7 @@ body {
 }
 
 .contact-note {
-    font-size: 12px;
+    font-size: 13px;
     color: #999;
 }
 
@@ -370,8 +420,167 @@ body {
 }
 
 .footer p {
-    font-size: 11px;
+    font-size: 12px;
     color: #999;
+}
+
+/* --- 詳細ページ --- */
+.work-detail {
+    padding: 48px 0 72px;
+    animation: fadeInUp 0.5s ease both;
+}
+
+.back-link {
+    display: inline-block;
+    font-size: 14px;
+    color: #2d6e8e;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+.back-link:hover {
+    color: #1b4d63;
+}
+
+.work-detail-header {
+    margin-bottom: 32px;
+}
+
+.work-detail-tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background: #2d6e8e;
+    padding: 4px 14px;
+    margin-bottom: 16px;
+}
+
+.work-detail-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.4;
+}
+
+.work-detail-image {
+    margin-bottom: 40px;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    max-width: 640px;
+}
+
+.work-detail-image img {
+    width: 100%;
+    display: block;
+}
+
+.work-detail-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 48px;
+}
+
+.work-detail-main h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    margin-top: 32px;
+}
+
+.work-detail-main h2:first-child {
+    margin-top: 0;
+}
+
+.work-detail-main p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 8px;
+}
+
+.work-detail-main ul {
+    list-style: none;
+    padding: 0;
+}
+
+.work-detail-main li {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.9;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 4px;
+}
+
+.work-detail-main li::before {
+    content: '・';
+    position: absolute;
+    left: 0;
+    color: #2d6e8e;
+    font-weight: 700;
+}
+
+.work-detail-sidebar {
+    padding: 28px;
+    background: #f7f8fa;
+    border: 1px solid #e8e8e8;
+    align-self: start;
+}
+
+.work-detail-sidebar h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    margin-top: 24px;
+}
+
+.work-detail-sidebar h3:first-child {
+    margin-top: 0;
+}
+
+.work-detail-sidebar p {
+    font-size: 15px;
+    color: #1a1a1a;
+}
+
+.work-detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.work-detail-tags span {
+    font-size: 13px;
+    color: #2d6e8e;
+    background: #eef5f8;
+    padding: 4px 12px;
+    font-weight: 600;
+}
+
+.work-detail-link {
+    display: inline-block;
+    font-size: 15px;
+    color: #fff;
+    background: #2d6e8e;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 12px 28px;
+    text-align: center;
+    width: 100%;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.work-detail-link:active {
+    transform: scale(0.97);
+}
+
+.work-detail-link:hover {
+    background: #1b4d63;
 }
 
 /* --- レスポンシブ --- */
@@ -381,11 +590,11 @@ body {
     }
 
     .header-nav a {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .header-name {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .hero {
@@ -393,16 +602,16 @@ body {
     }
 
     .hero h1 {
-        font-size: 20px;
+        font-size: 24px;
     }
 
     .hero-desc {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .hero-btn {
-        padding: 10px 24px;
-        font-size: 13px;
+        padding: 12px 28px;
+        font-size: 14px;
     }
 
     .strengths {
@@ -431,7 +640,7 @@ body {
     }
 
     .work-body h3 {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .about {
@@ -439,7 +648,7 @@ body {
     }
 
     .about-text h3 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .contact {
@@ -452,6 +661,57 @@ body {
     }
 
     .section-title {
+        font-size: 14px;
+    }
+
+    .work-detail {
+        padding: 24px 0 40px;
+    }
+
+    .back-link {
         font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .work-detail-header {
+        margin-bottom: 20px;
+    }
+
+    .work-detail-header h1 {
+        font-size: 20px;
+    }
+
+    .work-detail-tag {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .work-detail-image {
+        max-width: 100%;
+        margin-bottom: 28px;
+    }
+
+    .work-detail-body {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .work-detail-main h2 {
+        font-size: 16px;
+        margin-top: 24px;
+    }
+
+    .work-detail-main p,
+    .work-detail-main li {
+        font-size: 14px;
+    }
+
+    .work-detail-sidebar {
+        padding: 20px;
+    }
+
+    .work-detail-link {
+        font-size: 14px;
+        padding: 10px 20px;
     }
 }
