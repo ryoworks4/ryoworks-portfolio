@@ -265,6 +265,42 @@
     </div>
 </footer>
 
+<!-- チャットボット -->
+<div id="chatbot">
+    <button id="chat-toggle" aria-label="チャットを開く">
+        <svg id="chat-icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <svg id="chat-icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+    </button>
+    <div id="chat-window">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar">R</div>
+                <div>
+                    <div class="chat-header-name">RyoWorks AI</div>
+                    <div class="chat-header-status">お気軽にご質問ください</div>
+                </div>
+            </div>
+        </div>
+        <div id="chat-messages">
+            <div class="chat-msg bot">
+                <div class="chat-bubble">こんにちは！RyoWorksのAIアシスタントです。<br>サービス内容や制作実績について、お気軽にご質問ください！</div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="メッセージを入力..." autocomplete="off">
+            <button id="chat-send" aria-label="送信">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
 <script>
     document.getElementById('contact-email').textContent = ['ryoworks44','gmail.com'].join('@');
 
@@ -285,6 +321,88 @@
     document.querySelectorAll('.fade-in').forEach(function(el) {
         observer.observe(el);
     });
+
+    // --- チャットボット ---
+    (function() {
+        var CHAT_API = 'https://portfolio-chatbot-blush.vercel.app/api/chat';
+        var toggle = document.getElementById('chat-toggle');
+        var chatWindow = document.getElementById('chat-window');
+        var iconOpen = document.getElementById('chat-icon-open');
+        var iconClose = document.getElementById('chat-icon-close');
+        var input = document.getElementById('chat-input');
+        var sendBtn = document.getElementById('chat-send');
+        var messages = document.getElementById('chat-messages');
+        var isOpen = false;
+        var history = [];
+        var sending = false;
+
+        toggle.addEventListener('click', function() {
+            isOpen = !isOpen;
+            chatWindow.classList.toggle('open', isOpen);
+            iconOpen.style.display = isOpen ? 'none' : 'block';
+            iconClose.style.display = isOpen ? 'block' : 'none';
+            if (isOpen) input.focus();
+        });
+
+        function addMessage(text, sender) {
+            var div = document.createElement('div');
+            div.className = 'chat-msg ' + sender;
+            var bubble = document.createElement('div');
+            bubble.className = 'chat-bubble';
+            bubble.textContent = text;
+            div.appendChild(bubble);
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function showTyping() {
+            var div = document.createElement('div');
+            div.className = 'chat-msg bot';
+            div.id = 'chat-typing';
+            div.innerHTML = '<div class="chat-bubble typing"><span></span><span></span><span></span></div>';
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function removeTyping() {
+            var el = document.getElementById('chat-typing');
+            if (el) el.remove();
+        }
+
+        function sendMessage() {
+            var text = input.value.trim();
+            if (!text || sending) return;
+            sending = true;
+            addMessage(text, 'user');
+            history.push({ role: 'user', text: text });
+            input.value = '';
+            showTyping();
+
+            fetch(CHAT_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text, history: history.slice(0, -1) })
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                removeTyping();
+                var reply = data.reply || data.error || 'すみません、うまく応答できませんでした。';
+                addMessage(reply, 'bot');
+                history.push({ role: 'model', text: reply });
+                sending = false;
+            })
+            .catch(function() {
+                removeTyping();
+                addMessage('接続エラーが発生しました。しばらくしてからお試しください。', 'bot');
+                sending = false;
+            });
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    })();
 </script>
 </body>
 </html>
